@@ -1,5 +1,3 @@
-let port = chrome.runtime.connect();
-
 document.getElementById("fill").addEventListener("click", async () => {
   // function for sending post requests to excel2json API
 
@@ -11,7 +9,7 @@ document.getElementById("fill").addEventListener("click", async () => {
 
   // Response for Ib Laursen
 
-  async function getJsonObj() {
+  let getJsonObj = async () => {
     const uploadElement = document.getElementById("upload");
 
     let file = uploadElement.files[0];
@@ -23,8 +21,9 @@ document.getElementById("fill").addEventListener("click", async () => {
       method: "POST",
       body: payload,
     }).then((res) => res.json());
-  }
+  };
 
+  // Running FUNCTIONS
   let jsonObj = await getJsonObj();
 
   for (i = 0; i < 12; i++) {
@@ -50,10 +49,6 @@ document.getElementById("fill").addEventListener("click", async () => {
       tabs[0].id,
       {
         success: jsonObj,
-        varekode:
-          document.getElementById("varekode").value == ""
-            ? "null"
-            : document.getElementById("varekode").value,
 
         varebeskrivelse:
           document.getElementById("varebeskrivelse").value == ""
@@ -70,16 +65,4 @@ document.getElementById("fill").addEventListener("click", async () => {
       }
     );
   });
-});
-
-port.onMessage.addListener(function (msg) {
-  debugger;
-  if (msg.question == "Who's there?")
-    port.postMessage({
-      answer: "Madame",
-    });
-  else if (msg.question == "Madame who?")
-    port.postMessage({
-      answer: "Madame... Bovary",
-    });
 });

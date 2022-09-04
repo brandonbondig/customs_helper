@@ -19,7 +19,8 @@
         <div>
             <label for="cars">Vælg bruger:</label>
 
-            <select name="cars" id="user">
+            <select name="user" id="user">
+                <option value="not-chosen">-vælg-</option>
                 <option value="A25BB">A25BB</option>
                 <option value="A25LS">A25LS</option>
                 <option value="A25MT">A25MT</option>
@@ -29,6 +30,7 @@
             <label for="valuta">Vælg valuta:</label>
 
             <select name="valuta" id="valuta">
+                <option value="not-chosen">-vælg-</option>
                 <option value="A25BB">DKK</option>
                 <option value="A25LS">EUR</option>
                 <option value="A25MT">NOK</option>
@@ -37,7 +39,6 @@
             </select>
         </div>
         <div>
-            <input type="text" placeholder="Varekode" id="varekode"> <br>
             <input type="text" placeholder="Varebeskrivelse" id="varebeskrivelse" class="m-2"> <br>
             <input type="text" placeholder="Antal Kolli" id="kolli">
         </div>
