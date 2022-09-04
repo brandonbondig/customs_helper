@@ -1,0 +1,98 @@
+[
+  {
+    "invoice": "224100",
+    "tariff": "3406000000",
+    "country": "CN",
+    "quantity": 24,
+    "weight": 2.904,
+    "amount": 624
+  },
+  {
+    "invoice": "224100",
+    "tariff": "4415202000",
+    "country": "DK",
+    "quantity": 1,
+    "weight": 12,
+    "amount": 89
+  },
+  {
+    "invoice": "224100",
+    "tariff": "4420119000",
+    "country": "IN",
+    "quantity": 72,
+    "weight": 0.408,
+    "amount": 1284
+  },
+  {
+    "invoice": "224100",
+    "tariff": "4821909000",
+    "country": "DK",
+    "quantity": 1,
+    "weight": 0.494,
+    "amount": 304
+  },
+  {
+    "invoice": "224100",
+    "tariff": "6301309090",
+    "country": "IN",
+    "quantity": 6,
+    "weight": 5.4,
+    "amount": 359.7
+  },
+  {
+    "invoice": "224100",
+    "tariff": "6304920090",
+    "country": "CN",
+    "quantity": 44,
+    "weight": 1.288,
+    "amount": 1851.6
+  },
+  {
+    "invoice": "224100",
+    "tariff": "6912002310",
+    "country": "CN",
+    "quantity": 4,
+    "weight": 5.76,
+    "amount": 636
+  },
+  {
+    "invoice": "224100",
+    "tariff": "6914100000",
+    "country": "CN",
+    "quantity": 48,
+    "weight": 1.344,
+    "amount": 384
+  },
+  {
+    "invoice": "224100",
+    "tariff": "7323990090",
+    "country": "CN",
+    "quantity": 4,
+    "weight": 7.04,
+    "amount": 764
+  },
+  {
+    "invoice": "224100",
+    "tariff": "7326200090",
+    "country": "CN",
+    "quantity": 1,
+    "weight": 4.45,
+    "amount": 611
+  },
+  {
+    "invoice": "224100",
+    "tariff": "7326200090",
+    "country": "IN",
+    "quantity": 36,
+    "weight": 1.656,
+    "amount": 612
+  },
+  {
+    "invoice": "224100",
+    "tariff": "8302500000",
+    "country": "IN",
+    "quantity": 6,
+    "weight": 2.352,
+    "amount": 582
+  }
+]

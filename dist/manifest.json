@@ -1,0 +1,28 @@
+{
+  "name": "Customs Helper",
+  "version": "0.0.1",
+  "description": "to help the customs department",
+  "permissions": [
+    "clipboardWrite",
+    "activeTab",
+    "notifications",
+    "contextMenus",
+    "storage",
+    "scripting"
+  ],
+  "background": {
+    "service_worker": "background.js"
+  },
+  "content_scripts": [
+    {
+      "matches": ["<all_urls>"],
+      "js": ["content.js"]
+    }
+  ],
+  "action": {
+    "default_popup": "ext/popup.html"
+  },
+  "host_permissions": ["http://*/*", "https://*/*"],
+
+  "manifest_version": 3
+}
