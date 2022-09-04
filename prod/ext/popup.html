@@ -16,17 +16,17 @@
 <body>
     <p class="title">Customs Helper v0.1</p>
     <div id="wrapper">
-        <div>
-            <label for="cars">Vælg bruger:</label>
+        <div class="m-1">
+            <label for="users">Vælg bruger:</label>
 
             <select name="user" id="user">
                 <option value="not-chosen">-vælg-</option>
-                <option value="A25BB">A25BB</option>
-                <option value="A25LS">A25LS</option>
-                <option value="A25MT">A25MT</option>
+                <option value="A25BB" id="A25BB">A25BB</option>
+                <option value="A25LS" id="A25LS">A25LS</option>
+                <option value="A25MT" id="A25MT">A25MT</option>
             </select>
         </div>
-        <div>
+        <div class="m-1">
             <label for="valuta">Vælg valuta:</label>
 
             <select name="valuta" id="valuta">
@@ -38,13 +38,24 @@
                 <option value="SEK">SEK</option>
             </select>
         </div>
+        <input type="checkbox" name="auto" id="autofill" placeholder="autofill"> AutoFill
         <div>
-            <input type="text" placeholder="Varebeskrivelse" id="varebeskrivelse" class="m-2"> <br>
-            <input type="text" placeholder="Antal Kolli" id="kolli">
+
+            <input type="text" placeholder="Varebeskrivelse" id="varebeskrivelse" class="mt-2">
+            <input type="number" placeholder="Antal Kolli" id="kolli" class="m-2">
+            <input type="number" id="index" name="index" min="0" placeholder="Index">
         </div>
         <div>
-            <input class="btn btn-primary m-2" type="file" name="Upload" id="upload"> <br>
-            <button class="btn btn-success mb-2" id="fill">Start</button>
+            <div>
+                <p id="max-index" style="font-weight: bold;"></p>
+
+            </div>
+            <input class="btn btn-primary mb-2" type="file" name="Upload" id="upload"> <br>
+            <button class="btn btn-secondary mb-2" id="fill">Indsæt</button>
+            <button class="btn btn-success mb-2" id="spare">Spare varepost</button>
+
+
+
         </div>
     </div>
     <script src="popup.js"></script>
