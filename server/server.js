@@ -1,5 +1,5 @@
 const express = require("express");
-const { excel2json } = require("./excel2json");
+const { excel2json } = require("./scripts/excel2json");
 const fileUpload = require("express-fileupload");
 const fs = require("fs");
 
@@ -35,7 +35,7 @@ app.post("/upload_excel", async (req, res) => {
       ///fs.unlinkSync("./temp/" + dateNow + excel.name);
 
       console.log("post request succeded");
-      
+
       res.send(jsonObj);
     }
   } catch (err) {
