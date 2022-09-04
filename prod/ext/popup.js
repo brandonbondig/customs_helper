@@ -1,5 +1,14 @@
+let port = chrome.runtime.connect();
+
 document.getElementById("fill").addEventListener("click", async () => {
   // function for sending post requests to excel2json API
+
+  let getTariffReq = async (varekode) => {
+    return await fetch(
+      `https://gw.systema.no:8446/espedsgskat/searchTaricVarukod_SkatExport.do?applicationUser=A25BB&taricVarukod=${varekode}&ajax=true`
+    ).then((res) => res.json());
+  };
+
   // Response for Ib Laursen
 
   async function getJsonObj() {
@@ -16,7 +25,23 @@ document.getElementById("fill").addEventListener("click", async () => {
     }).then((res) => res.json());
   }
 
-  const obj = await getJsonObj();
+  let jsonObj = await getJsonObj();
+
+  for (i = 0; i < 12; i++) {
+    let isReq = await getTariffReq(jsonObj[i]["tariff"]);
+
+    if (isReq[0]["dktara63"] != "") {
+      jsonObj[i]["isAmountReq"] = true;
+    } else {
+      jsonObj[i]["isAmountReq"] = false;
+    }
+
+    if (isReq[0]["dktara58"] == "U") {
+      jsonObj[i]["isCertificateReq"] = true;
+    } else {
+      jsonObj[i]["isCertificateReq"] = false;
+    }
+  }
 
   // for sending messages to content.js
 
@@ -24,7 +49,7 @@ document.getElementById("fill").addEventListener("click", async () => {
     chrome.tabs.sendMessage(
       tabs[0].id,
       {
-        success: obj,
+        success: jsonObj,
         varekode:
           document.getElementById("varekode").value == ""
             ? "null"
@@ -45,4 +70,16 @@ document.getElementById("fill").addEventListener("click", async () => {
       }
     );
   });
+});
+
+port.onMessage.addListener(function (msg) {
+  debugger;
+  if (msg.question == "Who's there?")
+    port.postMessage({
+      answer: "Madame",
+    });
+  else if (msg.question == "Madame who?")
+    port.postMessage({
+      answer: "Madame... Bovary",
+    });
 });

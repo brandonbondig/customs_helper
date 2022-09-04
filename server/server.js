@@ -26,13 +26,14 @@ app.post("/upload_excel", async (req, res) => {
       });
     } else {
       const dateNow = Date.now();
+
       const excel = req.files.excel;
 
       await excel.mv("./temp/" + dateNow + excel.name);
 
       let jsonObj = await excel2json("./temp/" + dateNow + excel.name);
 
-      ///fs.unlinkSync("./temp/" + dateNow + excel.name);
+      fs.unlinkSync("./temp/" + dateNow + excel.name);
 
       console.log("post request succeded");
 

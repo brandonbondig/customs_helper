@@ -1,5 +1,17 @@
 const readXlsxFile = require("read-excel-file/node");
 
+let searchTaric = async (tariff) => {
+  try {
+    const res = await fetch(
+      `https://gw.systema.no:8446/espedsgskat/searchTaricVarukod_SkatExport.do?applicationUser=A25BB&taricVarukod=${tariff}&ajax=true`
+    );
+    const data = await res.json();
+    console.log(data);
+  } catch (err) {
+    console.error(err);
+  }
+};
+
 let excel2json = async (file) => {
   let jsonObj = await readXlsxFile(file).then((rows) => {
     let arr = [];
@@ -8,6 +20,7 @@ let excel2json = async (file) => {
       if (rows[i][0] === null) {
         break;
       }
+
       arr.push({
         invoice: rows[i][0],
         tariff: rows[i][1],
