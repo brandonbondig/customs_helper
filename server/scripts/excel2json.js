@@ -1,6 +1,6 @@
 const readXlsxFile = require("read-excel-file/node");
 
-let excel2json = async (file) => {
+let ibLaursen = async (file) => {
   let jsonObj = await readXlsxFile(file).then((rows) => {
     let arr = [];
 
@@ -11,10 +11,12 @@ let excel2json = async (file) => {
 
       arr.push({
         invoice: rows[i][0],
-        tariff: rows[i][1].substring(0, 8),
+        tariff: parseInt(rows[i][1].substring(0, 8)),
         country: rows[i][2],
         quantity: rows[i][3],
-        weight: Math.ceil(rows[i][4]),
+        brutto_weight: Math.ceil(rows[i][4]),
+        netto_weight:
+          Math.ceil(rows[i][4]) == 1 ? 1 : Math.ceil(rows[i][4]) - 1,
         amount: parseFloat(rows[i][5]),
       });
     }
@@ -25,4 +27,4 @@ let excel2json = async (file) => {
   return jsonObj;
 };
 
-module.exports = { excel2json };
+module.exports = { ibLaursen };

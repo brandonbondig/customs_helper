@@ -6,7 +6,7 @@ let excel2Json = async () => {
   const payload = new FormData();
   payload.append("excel", file);
 
-  return fetch("http://localhost:3000/upload_excel", {
+  return fetch("http://localhost:3000/excel-to-json/ib-laursen", {
     method: "POST",
     body: payload,
   }).then((res) => res.json());
@@ -24,9 +24,12 @@ document.getElementById("fill").addEventListener("click", async () => {
         tabs[0].id,
         {
           event: true,
-          index: document.getElementById("index").value,
+          index: document.getElementById("index").value - 1,
           varebeskrivelse: document.getElementById("varebeskrivelse").value,
-          kolli: document.getElementById("kolli").value,
+          kolli:
+            document.getElementById("kolli").value == ""
+              ? 0
+              : document.getElementById("kolli").value,
         },
         (err) => {
           console.log(err);
@@ -91,14 +94,24 @@ document.getElementById("upload").addEventListener("change", async () => {
   }
 
   // Sets converted_excel
-  chrome.storage.local.set({ converted_excel: converted_excel_file }, () => {
-    console.log(converted_excel_file);
-  });
+  await chrome.storage.local.set(
+    { converted_excel: converted_excel_file },
+    () => {
+      console.log(converted_excel_file);
+
+      document.getElementById("max-index").innerText =
+        "vareposter: " + converted_excel_file.length;
+    }
+  );
 });
 
 // Sets username
-document.getElementById("user").addEventListener("change", () => {
+document.getElementById("user").addEventListener("change", async () => {
   let user = document.getElementById("user").value;
+
+  user == "not-chosen"
+    ? (document.getElementById("upload").disabled = true)
+    : (document.getElementById("upload").disabled = false);
 
   chrome.storage.local.set({ bruger: user }, () => {
     console.log("Stored: " + user);
@@ -148,6 +161,10 @@ window.onload = () => {
       document.getElementById("kolli").value = result.kolli;
       document.getElementById("max-index").innerText =
         "vareposter: " + result.converted_excel.length;
+      result.bruger == "not-chosen"
+        ? (document.getElementById("upload").disabled = true)
+        : (document.getElementById("upload").disabled = false);
+
       // Get a reference to our file input
       let fileInput = document.getElementById("upload");
 

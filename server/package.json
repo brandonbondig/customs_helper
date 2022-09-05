@@ -15,6 +15,7 @@
     "jquery": "^3.6.1",
     "node-fetch": "^3.2.10",
     "nodemon": "^2.0.19",
+    "pdf-to-excel": "^0.3.2",
     "read-excel-file": "^5.4.7"
   }
 }

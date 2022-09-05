@@ -1,49 +1,32 @@
+// Imports
 const express = require("express");
-const { excel2json } = require("./scripts/excel2json");
 const fileUpload = require("express-fileupload");
-const fs = require("fs");
 
+// Initializers
 const app = express();
 const port = 3000;
 
+// Routes
+const excel_to_json = require("./routes/excel_to_json");
+const pdf_to_json = require("./routes/pdf_to_json");
+
+// Middleware
 app.use(
   fileUpload({
     createParentPath: true,
   })
 );
 
+// Local endpoints
 app.get("/", (req, res) => {
-  excel2json("python/ibL.xlsx");
-  res.sendStatus(200);
+  res.json({ message: "Lavet af: Brandon Bondig" });
 });
 
-app.post("/upload_excel", async (req, res) => {
-  try {
-    if (!req.files) {
-      res.send({
-        status: false,
-        message: "No file uploaded",
-      });
-    } else {
-      const dateNow = Date.now();
+//Extern endpoints
+app.use("/excel-to-json", excel_to_json);
+app.use("/pdf-to-json", pdf_to_json);
 
-      const excel = req.files.excel;
-
-      await excel.mv("./temp/" + dateNow + excel.name);
-
-      let jsonObj = await excel2json("./temp/" + dateNow + excel.name);
-
-      fs.unlinkSync("./temp/" + dateNow + excel.name);
-
-      console.log("post request succeded");
-
-      res.send(jsonObj);
-    }
-  } catch (err) {
-    res.status(500).send(err);
-  }
-});
-
+// Start server
 app.listen(port, () => {
   console.log(`listening on port ${port}`);
 });
