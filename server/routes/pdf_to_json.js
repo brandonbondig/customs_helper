@@ -28,6 +28,13 @@ router.post("/cycle-service", async (req, res) => {
 
       let jsonObj = await cycleService("./temp/" + dateNow + pdf.name);
 
+      try {
+        fs.unlinkSync("./temp/" + dateNow + pdf.name);
+        console.log("File removed:", "./temp/" + dateNow + pdf.name);
+      } catch (err) {
+        console.error(err);
+      }
+
       console.log("post request: " + pdf.name);
 
       res.send(jsonObj);

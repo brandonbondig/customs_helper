@@ -1,6 +1,7 @@
 const pdf_to_excel = require("pdf-to-excel");
 const readXlsxFile = require("read-excel-file/node");
 let countries = require("../countries/countries.json");
+const fs = require("fs");
 
 let cycleService = async (file) => {
   const date = Date.now();
@@ -43,6 +44,14 @@ let cycleService = async (file) => {
     let jsonObj = JSON.stringify(arr);
     return jsonObj;
   });
+
+  try {
+    fs.unlinkSync("./temp/" + date + ".xlsx");
+    console.log("File removed:", "./temp/" + date + ".xlsx");
+  } catch (err) {
+    console.error(err);
+  }
+
   return await jsonObj;
 };
 
