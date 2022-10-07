@@ -15,13 +15,10 @@ chrome.runtime.onMessage.addListener(async (request, sender, sendResponse) => {
         document.getElementById("dkev_42").value =
           converted_excel[request.index]["amount"]; // varens pris
 
-        document.getElementById("dkev_35").value =
-          converted_excel[request.index]["weight"]; // brutto vægt
+        document.getElementById("dkev_35").value = converted_excel[request.index]["brutto_weight"]; // brutto vægt
 
-        document.getElementById("dkev_38").value =
-          converted_excel[request.index]["weight"] == 1
-            ? converted_excel[request.index]["weight"]
-            : converted_excel[request.index]["weight"] - 1;
+        document.getElementById("dkev_38").value = converted_excel[request.index]["netto_weight"]
+
         // netto vægt
 
         document.getElementById("dkev_311").value = "ADR"; // kolli mærke

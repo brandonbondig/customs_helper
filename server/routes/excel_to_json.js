@@ -1,7 +1,7 @@
 // Initializers
 const express = require("express");
 const router = express.Router();
-
+const fs = require("fs");
 // Imports
 const { ibLaursen } = require("../scripts/excel2json.js");
 
@@ -30,6 +30,13 @@ router.post("/ib-laursen", async (req, res) => {
       console.log("post request succeded");
 
       res.send(jsonObj);
+
+      try {
+        fs.unlinkSync("./temp/" + date + ".xlsx");
+      } catch (err) {
+        console.error(err);
+      }
+
     }
   } catch (err) {
 
