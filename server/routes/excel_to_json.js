@@ -32,6 +32,7 @@ router.post("/ib-laursen", async (req, res) => {
       res.send(jsonObj);
     }
   } catch (err) {
+    
     res.status(500).send(err);
   }
 });
