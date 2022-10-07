@@ -6,7 +6,7 @@ let excel2Json = async () => {
   const payload = new FormData();
   payload.append("excel", file);
 
-  return fetch("http://localhost:3000/excel-to-json/ib-laursen", {
+  return fetch("http://52.57.48.155/excel-to-json/ib-laursen", {
     method: "POST",
     body: payload,
   }).then((res) => res.json());
