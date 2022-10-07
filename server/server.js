@@ -1,10 +1,11 @@
 // Imports
 const express = require("express");
 const fileUpload = require("express-fileupload");
-
+const cors = require('cors')
 // Initializers
 const app = express();
 const port = 3000;
+app.use(cors())
 
 // Routes
 const excel_to_json = require("./routes/excel_to_json");
