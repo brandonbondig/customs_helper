@@ -24,7 +24,7 @@ router.post("/ib-laursen", async (req, res) => {
       const excel = req.files.excel;
 
       await excel.mv("./temp/" + date + ".xlsx");
-
+      
       let jsonObj = await ibLaursen("./temp/" + date + ".xlsx");
 
       console.log("post request succeded");
