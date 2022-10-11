@@ -1,21 +1,9 @@
-let excel2Json = async () => {
-  const uploadElement = document.getElementById("upload");
-
-  let file = uploadElement.files[0];
-
-  const payload = new FormData();
-  payload.append("excel", file);
-
-  return fetch("http://52.57.48.155/excel-to-json/ib-laursen", {
-    method: "POST",
-    body: payload,
-  }).then((res) => res.json());
-};
+import { getTariffRequirements } from "../scripts/getTariffReq.js"
+import { excel2Json } from "../scripts/excel2json.js"
 
 // Event Listener for fill button
-
+// for sending messages to content.js
 document.getElementById("fill").addEventListener("click", async () => {
-  // for sending messages to content.js
 
   await chrome.tabs.query(
     { active: true, currentWindow: true },
@@ -39,6 +27,7 @@ document.getElementById("fill").addEventListener("click", async () => {
   );
 });
 
+// Spare event
 document.getElementById("spare").addEventListener("click", async () => {
   chrome.tabs.query({ active: true, currentWindow: true }, function (tabs) {
     chrome.tabs.sendMessage(
@@ -66,29 +55,20 @@ document.getElementById("upload").addEventListener("change", async () => {
   // function for sending post requests to excel2json API
   let user = document.getElementById("user").value;
 
-  let getTariffRequirements = async (user, varekode) => {
-    return await fetch(
-      `https://gw.systema.no:8446/espedsgskat/searchTaricVarukod_SkatExport.do?applicationUser=${user}&taricVarukod=${varekode}&ajax=true`
-    ).then((res) => res.json());
-  };
-
-  // Running FUNCTIONS
-
+  // Convert excel to json
   let converted_excel_file = await excel2Json();
 
+  // Iterate through json
   for (i = 0; i < converted_excel_file.length; i++) {
-    let isReq = await getTariffRequirements(
-      user,
-      converted_excel_file[i]["tariff"]
-    );
+    let TariffRequirements = await getTariffRequirements(user, converted_excel_file[i]["tariff"]);
 
-    if (isReq[0]["dktara63"] != "") {
-      converted_excel_file[i]["isAmountReq"] = isReq[0]["dktara63"];
+    if (TariffRequirements[0]["dktara63"] != "") {
+      converted_excel_file[i]["isAmountReq"] = TariffRequirements[0]["dktara63"];
     } else {
       converted_excel_file[i]["isAmountReq"] = false;
     }
 
-    if (isReq[0]["dktara58"] == "U") {
+    if (TariffRequirements[0]["dktara58"] == "U") {
       converted_excel_file[i]["isCertificateReq"] = true;
     } else {
       converted_excel_file[i]["isCertificateReq"] = false;
@@ -160,7 +140,9 @@ window.onload = () => {
       document.getElementById("user").value = result.bruger;
       document.getElementById("valuta").value = result.valuta;
       document.getElementById("varebeskrivelse").value = result.varebeskrivelse;
-      document.getElementById("kolli").value = result.kolli;
+
+
+      result.kolli == '[object Object]' ? document.getElementById("kolli").value = 0 : document.getElementById("kolli").value = result.kolli
       document.getElementById("max-index").innerText =
         "vareposter: " + result.converted_excel.length;
       result.bruger == "not-chosen"
