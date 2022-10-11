@@ -3,6 +3,9 @@
 
 ### Node ###
 # Logs
+node_modules/
+.vscode
+vscode
 logs
 *.log
 npm-debug.log*
