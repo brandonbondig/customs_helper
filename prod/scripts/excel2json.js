@@ -1,5 +1,5 @@
 // Convert excel sheet to json
-export let excel2Json = async () => {
+export let excel2Json = async (currency) => {
 
     const uploadElement = document.getElementById("upload");
 
@@ -8,7 +8,7 @@ export let excel2Json = async () => {
     const payload = new FormData();
     payload.append("excel", file);
 
-    return fetch("http://52.57.48.155/excel-to-json/ib-laursen", {
+    return fetch(`http://52.57.48.155/excel-to-json/ib-laursen/${currency}`, {
         method: "POST",
         body: payload,
     }).then((res) => res.json());

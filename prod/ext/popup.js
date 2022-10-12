@@ -57,9 +57,10 @@ document.getElementById("upload").addEventListener("change", async () => {
 
   // function for sending post requests to excel2json API
   let user = document.getElementById("user").value;
-
+  let currency = document.getElementById("valuta").value
+  
   // Convert excel to json
-  let converted_excel_file = await excel2Json();
+  let converted_excel_file = await excel2Json(currency);
 
   // Iterate through json
   for (let i = 0; i < converted_excel_file.length; i++) {

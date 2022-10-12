@@ -2,6 +2,9 @@
 const express = require("express");
 const router = express.Router();
 const fs = require("fs");
+
+const bodyParser = require("body-parser")
+router.use(bodyParser.json())
 // Imports
 const { ibLaursen } = require("../scripts/excel2json.js");
 
@@ -11,7 +14,7 @@ router.get("/", () => {
   res.send(201);
 });
 
-router.post("/ib-laursen", async (req, res) => {
+router.post("/ib-laursen/:valuta", async (req, res) => {
   try {
     if (!req.files) {
       res.send({
@@ -25,7 +28,7 @@ router.post("/ib-laursen", async (req, res) => {
 
       await excel.mv("./temp/" + date + ".xlsx");
 
-      let jsonObj = await ibLaursen("./temp/" + date + ".xlsx");
+      let jsonObj = await ibLaursen("./temp/" + date + ".xlsx", req.params.valuta);
 
       console.log("post request succeded");
 
