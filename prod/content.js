@@ -27,7 +27,7 @@ chrome.runtime.onMessage.addListener(async (request, sender, sendResponse) => {
             : null;
 
         document.getElementById("dkev_34a").value = converted_excel[request.index]["country"]; // opr. land
-        document.getElementById("dkev_46").value = "1"; //Statistisk værdi
+        document.getElementById("dkev_46").value = converted_excel[request.index]["statistical_amount"]; // Statistisk værdi
         document.getElementById("dkev_403a").value = converted_excel[request.index]["invoice"]; // id
 
         // Certifikatkod
