@@ -1,13 +1,14 @@
 import { getTariffRequirements } from "../scripts/getTariffReq.js"
 import { excel2Json } from "../scripts/excel2json.js"
 
+
 // Event Listener for fill button
 // for sending messages to content.js
 document.getElementById("fill").addEventListener("click", async () => {
 
   await chrome.tabs.query(
     { active: true, currentWindow: true },
-    function (tabs) {
+    (tabs) => {
       chrome.tabs.sendMessage(
         tabs[0].id,
         {
@@ -52,6 +53,8 @@ document.getElementById("spare").addEventListener("click", async () => {
 
 // Event Listener for upload
 document.getElementById("upload").addEventListener("change", async () => {
+
+
   // function for sending post requests to excel2json API
   let user = document.getElementById("user").value;
 
@@ -59,7 +62,7 @@ document.getElementById("upload").addEventListener("change", async () => {
   let converted_excel_file = await excel2Json();
 
   // Iterate through json
-  for (i = 0; i < converted_excel_file.length; i++) {
+  for (let i = 0; i < converted_excel_file.length; i++) {
     let TariffRequirements = await getTariffRequirements(user, converted_excel_file[i]["tariff"]);
 
     if (TariffRequirements[0]["dktara63"] != "") {

@@ -1,5 +1,8 @@
+//import { currencyConverter } from './scripts/currencyConverter.js'
+
 chrome.runtime.onMessage.addListener(async (request, sender, sendResponse) => {
   // Get from storage
+  // console.log(currencyConverter());
 
   try {
     if (request.event) {
@@ -38,7 +41,7 @@ chrome.runtime.onMessage.addListener(async (request, sender, sendResponse) => {
     if (request.spare) {
       document.getElementById("submit").click();
     }
-    
+
     sendResponse({ status: "Success!" });
   } catch (error) {
     console.log(error);
