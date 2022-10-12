@@ -9,7 +9,7 @@ chrome.runtime.onMessage.addListener(async (request, sender, sendResponse) => {
       chrome.storage.local.get(["converted_excel"], (result) => {
 
         let converted_excel = result.converted_excel;
-
+        console.log(converted_excel);
         document.getElementById("dkev_331").value = converted_excel[request.index]["tariff"]; // varekode
         document.getElementById("dkev_42").value = converted_excel[request.index]["amount"]; // varens pris
         document.getElementById("dkev_35").value = converted_excel[request.index]["brutto_weight"]; // brutto vægt
