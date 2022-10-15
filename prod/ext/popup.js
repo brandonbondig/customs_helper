@@ -2,7 +2,7 @@ import { getTariffRequirements } from "../scripts/getTariffReq.js"
 import { excel2Json } from "../scripts/excel2json.js"
 
 
-// Event Listener for fill button
+// Event Listener for fill button,
 // for sending messages to content.js
 document.getElementById("fill").addEventListener("click", async () => {
 
