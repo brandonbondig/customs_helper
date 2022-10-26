@@ -2,6 +2,9 @@
   "name": "Customs Helper",
   "version": "0.0.1",
   "description": "to help the customs department",
+  "icons": {
+    "128": "assets/logo_customs.png"
+  },
   "permissions": [
     "clipboardWrite",
     "activeTab",
@@ -15,14 +18,20 @@
   },
   "content_scripts": [
     {
-      "matches": ["<all_urls>"],
-      "js": ["content.js"]
+      "matches": [
+        "<all_urls>"
+      ],
+      "js": [
+        "content.js"
+      ]
     }
   ],
   "action": {
     "default_popup": "ext/popup.html"
   },
-  "host_permissions": ["http://*/*", "https://*/*"],
-
+  "host_permissions": [
+    "http://*/*",
+    "https://*/*"
+  ],
   "manifest_version": 3
 }

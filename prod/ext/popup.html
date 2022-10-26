@@ -13,7 +13,7 @@
     <title>Document</title>
 </head>
 
-<body>
+<body class="bg-light">
     <p class="title">Customs Helper v0.1</p>
     <div id="wrapper">
         <div class="m-1">
@@ -39,25 +39,28 @@
             </select>
         </div>
         <input type="checkbox" name="auto" id="autofill" placeholder="autofill" disabled> AutoFill
-        <div>
-
-            <input type="text" placeholder="Varebeskrivelse" id="varebeskrivelse" class="mt-2">
-            <input type="number" placeholder="Antal Kolli" id="kolli" class="m-2">
-            <input type="number" id="index" name="index" min="1" placeholder="Index">
-        </div>
-        <div>
+        <div class="bg-white">
             <div>
-                <p id="max-index" style="font-weight: bold;"></p>
+
+                <input type="text" placeholder="Varebeskrivelse" id="varebeskrivelse" class="mt-2">
+                <input type="number" placeholder="Antal Kolli" id="kolli" class="m-2">
+                <input type="number" id="index" name="index" min="1" placeholder="Index">
+            </div>
+            <div>
+                <div>
+                    <p id="max-index" style="font-weight: bold;"></p>
+
+                </div>
+                <input class="btn btn-primary mb-2" type="file" name="upload" id="upload"> <br>
+                <button class="btn btn-secondary mb-2" id="fill">Indsæt</button>
+                <button class="btn btn-success mb-2" id="spare">Spare varepost</button>
+
+
 
             </div>
-            <input class="btn btn-primary mb-2" type="file" name="upload" id="upload"> <br>
-            <button class="btn btn-secondary mb-2" id="fill">Indsæt</button>
-            <button class="btn btn-success mb-2" id="spare">Spare varepost</button>
-
-
-
         </div>
     </div>
+
     <script type="module" src="popup.js"></script>
 
 </body>
